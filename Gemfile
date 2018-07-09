@@ -25,3 +25,7 @@ end
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
 end
+
+group :test do
+  gem 'shoulda-matchers', '~> 3.1.2'
+end
