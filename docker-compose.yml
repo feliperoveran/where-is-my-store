@@ -1,0 +1,30 @@
+version: '3.6'
+services:
+  app:
+    image: where-is-my-store
+    container_name: where-is-my-store-app
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - gems:/home/app
+    depends_on:
+      - postgis
+
+  gems:
+    image: busybox:latest
+    container_name: where-is-my-store-gems
+    volumes:
+      - /gems
+
+  postgis:
+    image: mdillon/postgis:10-alpine
+    container_name: where-is-my-store-postgis
+
+networks:
+  default:
+    driver: bridge
+    name: where-is-my-store
+
+volumes:
+  gems:
