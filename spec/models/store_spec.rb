@@ -31,6 +31,22 @@ RSpec.describe Store, type: :model do
       )
     end
 
+    it 'converts underscore names to camelCase names when creating a Store' do
+      json = JSON.parse file_fixture('store_underscore_names.json').read
+
+      described_class.from_json! json
+
+      expect(Store.last).to have_attributes(
+        id: json['id'].to_i,
+        name: json['trading_name'],
+        owner: json['owner_name'],
+        document: json['document'],
+        coverage_area: RGeo::GeoJSON.decode(json['coverage_area']),
+        address: RGeo::GeoJSON.decode(json['address'])
+      )
+
+    end
+
     it 'raises ActiveRecord::RecordInvalid when the store is invalid' do
       json = JSON.parse file_fixture('invalid_store.json').read
 

@@ -1,9 +1,9 @@
 {
   "id": "69",
-  "tradingName": "Adega Osasco",
-  "ownerName": "Monstro",
+  "trading_name": "Adega Osasco",
+  "owner_name": "Monstro",
   "document": "02.453.716/000170",
-  "coverageArea": {
+  "coverage_area": {
     "type": "MultiPolygon",
     "coordinates": [
       [
