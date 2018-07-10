@@ -7,6 +7,9 @@ RSpec.describe Store, type: :model do
   it { should validate_presence_of :coverage_area }
   it { should validate_presence_of :address }
 
+  subject { build(:store) }
+  it { should validate_uniqueness_of(:document).case_insensitive }
+
   describe '.from_json!' do
     it 'creates a new Store' do
       json = JSON.parse file_fixture('store.json').read

@@ -1,5 +1,6 @@
 class Store < ApplicationRecord
   validates_presence_of :name, :owner, :document, :coverage_area, :address
+  validates_uniqueness_of :document, case_sensitive: false
 
   def self.from_json!(json)
     json = json.with_indifferent_access.transform_keys! { |k| k.camelize :lower }
