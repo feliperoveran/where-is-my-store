@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Store, type: :model do
+  ###################
+  ### Validations ###
+  ###################
   it { should validate_presence_of :name }
   it { should validate_presence_of :owner }
   it { should validate_presence_of :document }
@@ -10,6 +13,9 @@ RSpec.describe Store, type: :model do
   subject { build(:store) }
   it { should validate_uniqueness_of(:document).case_insensitive }
 
+  #################
+  ### from_json ###
+  #################
   describe '.from_json!' do
     it 'creates a new Store' do
       json = JSON.parse file_fixture('store.json').read
@@ -56,6 +62,37 @@ RSpec.describe Store, type: :model do
       expect {
         described_class.from_json! json
       }.to raise_error ActiveRecord::RecordInvalid
+    end
+  end
+
+  ###############
+  ### nearest ###
+  ###############
+  describe '.nearest' do
+    it 'returns the nearest store from a point in the coverage area' do
+      create(
+        :store,
+        coverage_area: 'MULTIPOLYGON (((0 0, 10 0, 10 10, 0 10, 0 0)))',
+        address: 'POINT(8 8)'
+      )
+
+      nearest_store = create(
+        :store,
+        coverage_area: 'MULTIPOLYGON (((-4 5, 3 5, 2 1, 1 -2, -4 -2,-4 5)))',
+        address: 'POINT(1 2)'
+      )
+
+      expect(described_class.nearest(2, 4)).to eq nearest_store
+    end
+
+    it 'returns nil when the point is not in the coverage area' do
+      create(
+        :store,
+        coverage_area: 'MULTIPOLYGON (((-4 5, 3 5, 2 1, 1 -2, -4 -2,-4 5)))',
+        address: 'POINT(1 2)'
+      )
+
+      expect(described_class.nearest(69, 69)).to be_nil
     end
   end
 end

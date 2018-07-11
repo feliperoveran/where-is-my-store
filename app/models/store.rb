@@ -14,4 +14,14 @@ class Store < ApplicationRecord
       address: RGeo::GeoJSON.decode(json[:address].to_h.to_json)
     )
   end
+
+  def self.nearest(lat, long)
+    point = "ST_GeomFromText('POINT(#{lat} #{long})', 0)"
+
+    Store
+      .where(Arel.sql("ST_Within(#{point}, stores.coverage_area)"))
+      .order(Arel.sql("ST_Distance(#{point}, stores.address)"))
+      .limit(1)
+      .first
+  end
 end
