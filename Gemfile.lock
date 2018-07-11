@@ -59,6 +59,7 @@ GEM
     factory_bot_rails (4.10.0)
       factory_bot (~> 4.10.0)
       railties (>= 3.0.0)
+    ffaker (2.9.0)
     ffi (1.9.25)
     ffi-geos (1.2.1)
       ffi (>= 1.0.0)
@@ -169,6 +170,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   byebug
   factory_bot_rails (~> 4.10.0)
+  ffaker (~> 2.9)
   ffi-geos
   graphql (~> 1.8.4)
   listen (>= 3.0.5, < 3.2)
