@@ -6,8 +6,8 @@ class Types::MutationType < Types::BaseObject
     argument :trading_name, String, required: true
     argument :owner_name, String, required: true
     argument :document, String, required: true
-    argument :address, Types::GeoJsonPointType, required: true
-    argument :coverage_area, Types::GeoJsonMultiPolygonType, required: true
+    argument :address, Types::GeoJsonPointInputType, required: true
+    argument :coverage_area, Types::GeoJsonMultiPolygonInputType, required: true
   end
 
   def create_pdv(args)

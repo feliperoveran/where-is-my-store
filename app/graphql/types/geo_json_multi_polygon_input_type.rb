@@ -1,4 +1,4 @@
-class Types::GeoJsonMultiPolygonType < Types::BaseInputObject
+class Types::GeoJsonMultiPolygonInputType < Types::BaseInputObject
   description 'GeoJSON'
 
   argument :type, String, required: true

@@ -1,4 +1,4 @@
-class Types::GeoJsonPointType < Types::BaseInputObject
+class Types::GeoJsonPointInputType < Types::BaseInputObject
   description 'GeoJSON'
 
   argument :type, String, required: true
