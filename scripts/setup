@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+cd $(dirname $(dirname $0))
+
+on_error(){
+  red_text 'Something bad happened and the party must stop. Please check the logs'
+  exit 1
+}
+
+trap 'on_error' ERR
+
+yellow_text(){
+  echo "`tput setaf 3`$@`tput sgr0`"
+}
+
+red_text(){
+  echo "`tput setaf 1`$@`tput sgr0`"
+}
+
+green_text(){
+  echo "`tput setaf 2`$@`tput sgr0`"
+}
+
+build_docker_image(){
+  docker build --build-arg UID=$UID -t where-is-my-store .
+}
+
+##########################
+### Build docker image ###
+##########################
+
+yellow_text 'Building where-is-my-store image, this might take a while...'
+
+if [[ $(docker images | grep where-is-my-store) ]]; then
+  green_text 'Found docker image. Do you want to rebuild it? (y/N)'
+  read build_image
+
+  if [[ $build_image == 'y' ]]; then
+    build_docker_image
+  else
+    yellow_text 'Ok, skipping...'
+  fi
+else
+  build_docker_image
+fi
+
+######################
+### Database setup ###
+######################
+
+yellow_text 'Preparing the database...'
+docker-compose run --rm app rails db:setup
+
+green_text 'Everything ready to run where-is-my-store!'
