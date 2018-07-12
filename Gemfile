@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 ruby '2.5.1'
 
 # FFI with geos C++ library
 gem 'ffi-geos'
 # Map geo stuff easily
-gem "rgeo", "~> 1.0"
+gem 'rgeo', '~> 1.0'
 # Import/export using geojson files
-gem "rgeo-geojson", "~> 2.0"
+gem 'rgeo-geojson', '~> 2.0'
 # Rails is awesome :)
 gem 'rails', '~> 5.2.0'
 # Use postgresql as the database for Active Record
