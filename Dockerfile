@@ -13,7 +13,6 @@ ENV RAILS_LOG_TO_STDOUT=true
 # System variables
 ENV PATH $PATH:$BUNDLE_BIN
 
-
 # UID of the user that will be created
 ARG UID
 
