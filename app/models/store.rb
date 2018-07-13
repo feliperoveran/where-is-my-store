@@ -1,5 +1,10 @@
 class Store < ApplicationRecord
+  INVALID_DOCUMENT_MESSAGE = 'Document must have either 11 or 14 digits,'\
+    ' ignoring punctuation.'.freeze
+
+  before_validation :remove_document_punctuation
   validates_presence_of :name, :owner, :document, :coverage_area, :address
+  validate :document_format
   validates_uniqueness_of :document, case_sensitive: false
 
   def self.from_json!(json)
@@ -24,4 +29,16 @@ class Store < ApplicationRecord
       .limit(1)
       .first
   end
+
+  private
+
+    def document_format
+      unless document.present? && (document.size == 11 || document.size == 14)
+        errors.add(:document, INVALID_DOCUMENT_MESSAGE)
+      end
+    end
+
+    def remove_document_punctuation
+      self.document = document&.gsub(/\.|\/|-/, '')
+    end
 end
