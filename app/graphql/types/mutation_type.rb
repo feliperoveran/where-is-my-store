@@ -2,7 +2,7 @@ class Types::MutationType < Types::BaseObject
   field :create_pdv, Types::StoreType, null: false do
     description 'Create a new PDV'
 
-    argument :id, ID, required: true
+    argument :id, ID, required: false
     argument :trading_name, String, required: true
     argument :owner_name, String, required: true
     argument :document, String, required: true
@@ -12,5 +12,7 @@ class Types::MutationType < Types::BaseObject
 
   def create_pdv(args)
     Store.from_json! args
+  rescue ActiveRecord::RecordInvalid => e
+    GraphQL::ExecutionError.new e.message
   end
 end

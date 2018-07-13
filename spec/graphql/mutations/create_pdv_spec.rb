@@ -32,19 +32,59 @@ RSpec.describe 'createPdv GraphQL mutation' do
       }
     MUTATION
 
-    WhereIsMyStoreSchema.execute(query_string)
+    response = WhereIsMyStoreSchema.execute(query_string)
 
-    expect(Store.last).to have_attributes(
-      id: 69,
-      name: 'Loja do Monstro',
-      owner: 'O monstro',
-      document: '02.453.716/000170',
-      address: RGeo::Cartesian.factory.parse_wkt("POINT (1.0 2.0)"),
-      coverage_area: RGeo::Cartesian.factory.parse_wkt(
-        "MULTIPOLYGON " \
-        "(((30.0 20.0, 45.0 40.0, 10.0 40.0, 30.0 20.0))," \
-        "((15.0 5.0, 40.0 10.0, 10.0 20.0, 5.0 10.0, 15.0 5.0)))"
-      )
+    expect(response.to_h.deep_symbolize_keys).to eq(
+      data: {
+        createPdv: {
+          id: Store.last.id.to_s,
+          name: Store.last.name,
+          owner: Store.last.owner,
+          document: Store.last.document,
+          address: Store.last.address.as_json,
+          coverageArea: Store.last.coverage_area.as_json
+        }
+      }
+    )
+  end
+
+  it 'returns an error message when the creation fails' do
+    query_string = <<-MUTATION
+      mutation {
+        createPdv(
+          tradingName: "",
+          ownerName: "O monstro",
+          document: "02.453.716/000170",
+          address: {
+            type: "Point",
+            coordinates: [1, 2]
+          },
+          coverageArea: {
+            type: "MultiPolygon",
+            coordinates: [
+              [[[30, 20], [45, 40], [10, 40], [30, 20]]],
+              [[[15, 5], [40, 10], [10, 20], [5, 10], [15, 5]]]
+            ]
+          }
+        )
+        {
+          id
+          name
+          owner
+          document
+          address
+          coverageArea
+        }
+      }
+    MUTATION
+
+    response = WhereIsMyStoreSchema.execute(query_string)
+
+    expect(response.to_h.deep_symbolize_keys).to match(
+      data: nil,
+      errors: [
+        a_hash_including(message: "Validation failed: Name can't be blank")
+      ]
     )
   end
 end
