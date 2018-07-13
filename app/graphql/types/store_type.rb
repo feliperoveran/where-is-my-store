@@ -5,6 +5,6 @@ class Types::StoreType < Types::BaseObject
   field :name, String, null: false
   field :owner, String, null: false
   field :document, String, null: false
-  field :address, Types::PointType, null: false
+  field :address, Scalars::Point, null: false
   field :coverage_area, String, null: false
 end

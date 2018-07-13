@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Types::PointType = GraphQL::ScalarType.define do
+Scalars::Point = GraphQL::ScalarType.define do
   name 'Point'
   description 'The Point type represents a geo point with a latitude-longitude value pair.'
 
