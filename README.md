@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/feliperoveran/where-is-my-store.svg?style=shield)](https://circleci.com/gh/feliperoveran/where-is-my-store)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
