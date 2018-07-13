@@ -42,4 +42,27 @@ RSpec.describe 'searchPdv GraphQL query' do
       }
     )
   end
+
+  it 'returns an empty response when a store could not be found' do
+    query_string =<<-QUERY
+      {
+        searchPdv(latitude: 1, longitude: 3){
+          id
+          name
+          owner
+          document
+          address
+          coverageArea
+        }
+      }
+    QUERY
+
+    response = WhereIsMyStoreSchema.execute query_string
+
+    expect(response.to_h.deep_symbolize_keys).to eq(
+      data: {
+        searchPdv: nil
+      }
+    )
+  end
 end
