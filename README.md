@@ -14,13 +14,13 @@ There is a helper script to make our life easier when running commands inside
 the container. Run `./scripts/where-is-my-store ` to see the available options.
 
 ### Starting the app
-Run `./scripts/where-is-my-app start`
+Run `./scripts/where-is-my-store start`
 
 ### Running RSpec tests
-Run `./scripts/where-is-my-app rspec`
+Run `./scripts/where-is-my-store rspec`
 
 ### Running Rubocop
-Run `./scripts/where-is-my-app rubocop`
+Run `./scripts/where-is-my-store rubocop`
 
 ### Project URL
 This project runs on `localhost:3000`. You can change this by editing
