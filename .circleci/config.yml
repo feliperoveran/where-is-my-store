@@ -1,0 +1,25 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - run:
+          name: Setup project
+          command:  docker build --build-arg UID=1000 -t where-is-my-store .
+
+      - run:
+          name: Prepare database
+          # Sleep to wait for postgres to start
+          command: docker-compose -f docker-compose.circleci.yml run app sh -c "sleep 5 && rails db:create db:schema:load"
+
+      - run:
+          name: Rubocop will slap you
+          command: docker-compose -f docker-compose.circleci.yml run app rubocop
+
+      - run:
+          name: Rspec tests
+          command: docker-compose -f docker-compose.circleci.yml run app rspec

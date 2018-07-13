@@ -49,6 +49,6 @@ fi
 ######################
 
 yellow_text 'Preparing the database...'
-docker-compose run --rm app rails db:setup
+docker-compose run --rm app sh -c "sleep 5 && rails db:setup"
 
 green_text 'Everything ready to run where-is-my-store!'

@@ -1,0 +1,11 @@
+version: '3.2'
+services:
+  app:
+    image: where-is-my-store
+    container_name: where-is-my-store-app
+    depends_on:
+      - postgis
+
+  postgis:
+    image: mdillon/postgis:10-alpine
+    container_name: where-is-my-store-postgis
