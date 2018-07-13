@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'searchPdv GraphQL query' do
@@ -14,7 +16,7 @@ RSpec.describe 'searchPdv GraphQL query' do
       address: 'POINT(1 2)'
     )
 
-    query_string =<<-QUERY
+    query_string = <<-QUERY
       {
         searchPdv(latitude: 1, longitude: 3){
           id
@@ -50,7 +52,7 @@ RSpec.describe 'searchPdv GraphQL query' do
   end
 
   it 'returns an empty response when a store could not be found' do
-    query_string =<<-QUERY
+    query_string = <<-QUERY
       {
         searchPdv(latitude: 1, longitude: 3){
           id

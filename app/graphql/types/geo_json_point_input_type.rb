@@ -1,6 +1,10 @@
-class Types::GeoJsonPointInputType < Types::BaseInputObject
-  description 'GeoJSON'
+# frozen_string_literal: true
 
-  argument :type, String, required: true
-  argument :coordinates, Scalars::Point, required: true
+module Types
+  class GeoJsonPointInputType < Types::BaseInputObject
+    description 'GeoJSON'
+
+    argument :type, String, required: true
+    argument :coordinates, Scalars::Point, required: true
+  end
 end

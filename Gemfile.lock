@@ -204,7 +204,7 @@ DEPENDENCIES
   rgeo (~> 1.0)
   rgeo-geojson (~> 2.0)
   rspec-rails (~> 3.7.2)
-  rubocop (~> 0.58.1)
+  rubocop (~> 0.58.0)
   shoulda-matchers (~> 3.1.2)
   simplecov (~> 0.16.1)
 

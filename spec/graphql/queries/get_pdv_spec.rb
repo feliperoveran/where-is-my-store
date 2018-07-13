@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'get_pdv GraphQL query' do
   it 'returns a store with the given ID' do
     store = create(:store)
 
-    query_string =<<-QUERY
+    query_string = <<-QUERY
       {
         getPdv(id: #{store.id}) {
           id
