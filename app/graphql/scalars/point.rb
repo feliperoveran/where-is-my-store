@@ -5,5 +5,5 @@ Scalars::Point = GraphQL::ScalarType.define do
   description 'The Point type represents a geo point with a latitude-longitude value pair.'
 
   coerce_input ->(value, ctx) { value }
-  coerce_result ->(value, ctx) { value.to_s }
+  coerce_result ->(value, ctx) { RGeo::GeoJSON.encode(value) }
 end

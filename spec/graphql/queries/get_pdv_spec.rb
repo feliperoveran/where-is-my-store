@@ -26,8 +26,14 @@ RSpec.describe 'get_pdv GraphQL query' do
           name: store.name,
           owner: store.owner,
           document: store.document,
-          address: store.address.as_json,
-          coverageArea: store.coverage_area.as_json
+          address: {
+            type: 'Point',
+            coordinates: store.address.coordinates
+          },
+          coverageArea: {
+            type: 'MultiPolygon',
+            coordinates: store.coverage_area.coordinates
+          }
         }
       }
     )

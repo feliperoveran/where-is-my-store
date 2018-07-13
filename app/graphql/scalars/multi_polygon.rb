@@ -5,5 +5,5 @@ Scalars::MultiPolygon = GraphQL::ScalarType.define do
   description 'The MultiPolygon type represents a geo multipolygon used to represent an area'
 
   coerce_input ->(value, ctx) { value }
-  coerce_result ->(value, ctx) { value.to_s }
+  coerce_result ->(value, ctx) { RGeo::GeoJSON.encode(value) }
 end

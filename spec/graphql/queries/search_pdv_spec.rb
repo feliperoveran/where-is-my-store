@@ -36,8 +36,14 @@ RSpec.describe 'searchPdv GraphQL query' do
           name: nearest_store.name,
           owner: nearest_store.owner,
           document: nearest_store.document,
-          address: nearest_store.address.as_json,
-          coverageArea: nearest_store.coverage_area.as_json
+          address: {
+            type: 'Point',
+            coordinates: nearest_store.address.coordinates
+          },
+          coverageArea: {
+            type: 'MultiPolygon',
+            coordinates: nearest_store.coverage_area.coordinates
+          }
         }
       }
     )

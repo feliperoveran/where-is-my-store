@@ -41,8 +41,14 @@ RSpec.describe 'createPdv GraphQL mutation' do
           name: Store.last.name,
           owner: Store.last.owner,
           document: Store.last.document,
-          address: Store.last.address.as_json,
-          coverageArea: Store.last.coverage_area.as_json
+          address: {
+            type: 'Point',
+            coordinates: Store.last.address.coordinates
+          },
+          coverageArea: {
+            type: 'MultiPolygon',
+            coordinates: Store.last.coverage_area.coordinates
+          }
         }
       }
     )
