@@ -43,7 +43,7 @@ case $1 in
     run bundle ${@:2}
     ;;
   bundle-extensions)
-    docker-compose run --rm --user root app sh -c "apk update && apk add build-base && bundle ${@:2}"
+    docker-compose run --rm --user root app sh -c "apk update && apk add build-base && bundle ${@:2} && chown app:app -R /home/app"
     ;;
   run)
     run ${@:2}
