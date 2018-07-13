@@ -52,6 +52,61 @@ run it with `graphiql`.
 Using `GraphiQL`, check the `Docs` section to see the available types, queries
 and mutations :)
 
+#### Creating a new store
+```
+mutation {
+    createPdv(
+        id: 90,
+        address: {
+            type: "Point",
+            coordinates: [1, 2]
+        },
+        tradingName: "Loja do monstro",
+        ownerName: "monstro",
+        document: "123.456.789-10",
+        coverageArea: {
+            type: "MultiPolygon",
+            coordinates: [
+                [[[30, 20], [45, 40], [10, 40], [30, 20]]],
+                [[[15, 5], [40, 10], [10, 20], [5, 10], [15, 5]]]
+            ]
+        })
+    {
+      id
+      address
+      coverageArea
+      name
+      owner
+    }
+}
+
+```
+
+#### Finding the nearest store
+```
+{
+  searchPdv(latitude: -46.54, longitude: -23.63) {
+    id
+    address
+    coverageArea
+    name
+    owner
+  }
+}
+```
+
+#### Finding a store by ID
+```
+{
+  getPdv(id: 1) {
+    id
+    address
+    coverageArea
+    name
+    owner
+  }
+}
+```
 
 ## Deploying using AWS ECS with Fargate launch type and RDS
 #### Creating a database on RDS
