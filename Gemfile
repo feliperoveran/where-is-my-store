@@ -35,4 +35,5 @@ end
 group :test do
   gem 'factory_bot_rails', '~> 4.10.0'
   gem 'shoulda-matchers', '~> 3.1.2'
+  gem 'simplecov', '~> 0.16.1'
 end

@@ -7,6 +7,18 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+##################
+#### SimpleCov ###
+##################
+require 'simplecov'
+
+SimpleCov.start 'rails' do
+  add_filter '/spec/'
+  # Ignoring graphql_controller since it will not be tested directly
+  add_filter 'app/controllers/graphql_controller.rb'
+  coverage_dir 'tmp/coverage'
+end
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
