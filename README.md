@@ -3,8 +3,8 @@
 ## Setting up the project
 
 ### Project dependencies
-*  [`docker`](https://docs.docker.com/install/) > 18 (or newer)
-*  [`docker-compose`](https://docs.docker.com/compose/install/) > 1.20 (or newer)
+*  [`docker`](https://docs.docker.com/install/) > 18
+*  [`docker-compose`](https://docs.docker.com/compose/install/) > 1.20
 
 Make sure you have installed all dependencies and then run `./scripts/setup`
 and let the magic happen.
@@ -12,6 +12,9 @@ and let the magic happen.
 ### Using the helper script
 There is a helper script to make our life easier when running commands inside
 the container. Run `./scripts/where-is-my-store ` to see the available options.
+
+### Starting the app
+Run `./scripts/where-is-my-app start`
 
 ### Project URL
 This project runs on `localhost:3000`. You can change this by editing
