@@ -1,0 +1,44 @@
+{
+    "family": "where-is-my-store-database-migration",
+    "networkMode": "bridge",
+    "containerDefinitions": [
+        {
+            "cpu": 0,
+            "memoryReservation": 100,
+            "essential": true,
+            "name": "where-is-my-store-database-migration",
+            "image": "<ENTER IMAGE REPOSITORY AND VERSION>",
+            "command": ["./scripts/database-migration"],
+            "environment": [
+                {
+                    "name": "DATABASE_NAME",
+                    "value": "<ENTER DATABASE NAME>"
+                },
+                {
+                    "name": "DATABASE_USERNAME",
+                    "value": "<ENTER DATABASE USERNAME>"
+                },
+                {
+                    "name": "DATABASE_HOST",
+                    "value": "<ENTER DATABASE HOST>"
+                },
+                {
+                    "name": "DATABASE_PASSWORD",
+                    "value": "<ENTER DATABASE PASSWORD>"
+                },
+                {
+                    "name": "RAILS_ENV",
+                    "value": "production"
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "where-is-my-store",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "where-is-my-store-db-migration"
+                }
+            }
+        }
+    ]
+}

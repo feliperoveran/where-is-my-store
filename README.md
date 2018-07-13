@@ -41,3 +41,33 @@ so you can call it like `graphiql-app` from anywhere :)
 
 Install it using `Brew` using the command `brew cask install graphiql` and then
 run it with `graphiql`.
+
+
+## Deploying using AWS ECS with Fargate launch type and RDS
+#### Creating a database on RDS
+This app needs a `postgreSQL` database with `postgis` extensions enabled. See
+how to create one DB instance
+[here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html)
+and how to enable the extension
+[here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.html#Appendix.PostgreSQL.CommonDBATasks.PostGIS).
+
+#### Using AWS ECS
+The easiest way to use containers in ECS is to use Fargate, which handles the
+resource allocation for us.
+Check
+[here](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_GetStarted.html)
+to see how to get started using `Fargate`.
+
+Finally, use the sample task definitions on `scripts/task_definitions`,
+filling the variable values with the host, username, database name and password
+of the created RDS database.
+
+Application logs will be streamed to STDOUT and captured by ECS, so we can check
+it on the `logs` tab of the running task
+
+#### Database migrations
+Register a task definition using the sample file on
+`scripts/task_definitions/where-is-my-store-database-migration.json` and run it
+using the correct RDS database variables. Voilà :)
+**This should not be registered as a service, but rather used as a one-time only
+task**
