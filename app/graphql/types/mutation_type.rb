@@ -15,7 +15,7 @@ module Types
 
     def create_pdv(args)
       Store.from_json! args
-    rescue ActiveRecord::RecordInvalid => e
+    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique => e
       GraphQL::ExecutionError.new e.message
     end
   end
