@@ -16,6 +16,12 @@ the container. Run `./scripts/where-is-my-store ` to see the available options.
 ### Starting the app
 Run `./scripts/where-is-my-app start`
 
+### Running RSpec tests
+Run `./scripts/where-is-my-app rspec`
+
+### Running Rubocop
+Run `./scripts/where-is-my-app rubocop`
+
 ### Project URL
 This project runs on `localhost:3000`. You can change this by editing
 `docker-compose.yml` file.
