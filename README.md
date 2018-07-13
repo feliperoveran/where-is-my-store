@@ -48,6 +48,10 @@ so you can call it like `graphiql-app` from anywhere :)
 Install it using `Brew` using the command `brew cask install graphiql` and then
 run it with `graphiql`.
 
+## GraphQL documentation
+Using `GraphiQL`, check the `Docs` section to see the available types, queries
+and mutations :)
+
 
 ## Deploying using AWS ECS with Fargate launch type and RDS
 #### Creating a database on RDS
